@@ -51,6 +51,14 @@ def postorder_trav(node, lis):
         postorder_trav(node.right, lis)
         lis.append(node.val)
 
+
+def unit_tests(in_list, pre_list, post_list):
+    assert in_list == ['D', 'B', 'E', 'A', 'F', 'C']
+    assert pre_list == ['A', 'B', 'D', 'E', 'C', 'F']
+    assert post_list == ['D', 'E', 'B', 'F', 'C', 'A']
+    return "Passed all unit tests"
+
+
 if __name__ == "__main__":
     nodeA = Node('A')
     nodeB = Node('B')
@@ -66,7 +74,7 @@ if __name__ == "__main__":
     nodeC.left = nodeF
     # nodeB.right = Node(C)
     inord, preord, postord = tree.traversal()
+    print(unit_tests(inord, preord, postord))
     print("Inorder traversal: ", inord)
     print("Preorder traversal: ", preord)
     print("Postorder traversal: ", postord)
-    assert inord == ['D', 'B', 'E', 'A', 'F', 'C']
