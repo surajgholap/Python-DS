@@ -33,9 +33,34 @@ class BST:
                 else:
                     self.insert(node, r.left)
 
-    def delete(self, node):
+    def min_val(self, node):
+        "Returns minimum value of the bst."
+        curr = node
+        while curr.left:
+            curr = curr.left
+        return curr
+
+    def delete(self, key, r):
         "Deletes node from the BST."
-        pass
+        if r is None:
+            return r
+        if r.val < key:
+            r.right = self.delete(key, r.right)
+        elif r.val > key:
+            r.left = self.delete(key, r.left)
+        else:
+            if r.left is None:
+                temp = r.right
+                r = None
+                return temp
+            elif r.right is None:
+                temp = r.left
+                r = None
+                return temp
+            temp = self.min_val(r.right)
+            r.val = temp.val
+            r.right = self.delete(temp.val, r.right)
+        return r
 
     def traversal(self):
         "Returns inorder, preorder and postorder traversal of nodes."
@@ -94,5 +119,10 @@ if __name__ == "__main__":
     bst.insert(nodeE, bst.root)
     inord, preord, postord = bst.traversal()
     print(unit_tests(inord, preord, postord))
+    print("In-order traversal : {}, Pre-order traversal : {}, \
+Post-order traversal : {}".format(inord, preord, postord))
+    bst.delete(2, bst.root)
+    inord, preord, postord = bst.traversal()
+    # print(unit_tests(inord, preord, postord))
     print("In-order traversal : {}, Pre-order traversal : {}, \
 Post-order traversal : {}".format(inord, preord, postord))
