@@ -34,7 +34,7 @@ class BST:
                     self.insert(node, r.left)
 
     def min_val(self, node):
-        "Returns minimum value of the bst."
+        "Returns minimum value of the BST."
         curr = node
         while curr.left:
             curr = curr.left
@@ -61,6 +61,17 @@ class BST:
             r.val = temp.val
             r.right = self.delete(temp.val, r.right)
         return r
+
+    def search(self, r, value):
+        "Returns whether value is present in BST."
+        if not r:
+            return False
+        if r.val == value:
+            return True
+        elif r.val < value:
+            return self.search(r.right, value)
+        elif r.val > value:
+            return self.search(r.left, value)
 
     def traversal(self):
         "Returns inorder, preorder and postorder traversal of nodes."
@@ -126,3 +137,5 @@ Post-order traversal : {}".format(inord, preord, postord))
     # print(unit_tests(inord, preord, postord))
     print("In-order traversal : {}, Pre-order traversal : {}, \
 Post-order traversal : {}".format(inord, preord, postord))
+    print(bst.search(bst.root, 44))
+    print(bst.search(bst.root, 4))
