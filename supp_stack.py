@@ -3,6 +3,7 @@ class Stack:
     .items stores all stack values and
     gets min of the stack in O(1) using
     additional stack."""
+
     def __init__(self):
         self.items = []
         self.supp = []
@@ -16,7 +17,7 @@ class Stack:
     def pop(self):
         "Pop elements from top of the stack."
         if self.items[-1] == self.supp[-1]:
-                self.supp.pop()
+            self.supp.pop()
         self.items.pop()
 
     def peek(self):
@@ -37,6 +38,7 @@ class Stack:
 
     def __str__(self):
         return str(self.items)
+
 
 if __name__ == "__main__":
     stack = Stack()
