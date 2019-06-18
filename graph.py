@@ -47,7 +47,7 @@ class Graph:
     def recur_dfs(self, node):
         "DFS helper function."
         trav = []
-        visited = {}
+        visited = []
         self.dfs_traversal(node, visited, trav)
         return trav
 
@@ -56,9 +56,9 @@ class Graph:
         if node is None:
             return None
         trav.append(node.val)
-        visited[node] = 1
+        visited.append(node)
         for n in node.adj:
-            if n not in visited.keys():
+            if n not in visited:
                 self.dfs_traversal(n, visited, trav)
 
     def bfs(self, node):
@@ -75,11 +75,15 @@ class Graph:
 
 if __name__ == "__main__":
     """
+      7
+     /
     5 __ 6
     | \
     2  4 __ 1 __ 9
        |
        8
+       |
+       3
     """
     graph = Graph()
     node1 = GraphNode(5)
@@ -89,7 +93,10 @@ if __name__ == "__main__":
     node5 = GraphNode(8)
     node6 = GraphNode(2)
     node7 = GraphNode(9)
+    node8 = GraphNode(7)
+    node9 = GraphNode(3)
     node1.add_adjacent(node2)
+    node1.add_adjacent(node8)
     node1.add_adjacent(node3)
     node1.add_adjacent(node6)
     node2.add_adjacent(node4)
@@ -99,7 +106,10 @@ if __name__ == "__main__":
     node4.add_adjacent(node2)
     node4.add_adjacent(node7)
     node5.add_adjacent(node2)
+    node5.add_adjacent(node9)
+    node9.add_adjacent(node5)
     node6.add_adjacent(node1)
+    node8.add_adjacent(node1)
     graph.add_node(node1)
     graph.add_node(node2)
     graph.add_node(node3)
@@ -107,7 +117,9 @@ if __name__ == "__main__":
     graph.add_node(node5)
     graph.add_node(node6)
     graph.add_node(node7)
+    graph.add_node(node8)
+    graph.add_node(node9)
     struc = graph.graph_struct()
-    print(struc)
-    print(graph.bfs(5))
-    print(graph.recur_dfs(node1))
+    print('Structure of the ', struc)
+    print('BFS: ', graph.bfs(5))
+    print('DFS: ', graph.recur_dfs(node1))

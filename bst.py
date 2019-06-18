@@ -40,6 +40,23 @@ class BST:
             curr = curr.left
         return curr
 
+    def max_val(self, node):
+        "Return maximum value in a BST."
+        curr = node
+        while curr.right:
+            curr = curr.right
+        return curr
+
+    def sec_largest(self, node):
+        "Return second largest valued node of the BST."
+        curr = node
+        while curr:
+            if curr.right and not curr.right.left and not curr.right.right:
+                return curr
+            if curr.left and not curr.right:
+                return self.max_val(curr.left)
+            curr = curr.right
+
     def delete(self, key, r):
         "Deletes node from the BST."
         if r is None:
@@ -82,7 +99,33 @@ class BST:
         preorder_trav(node, preord_list)
         postord_list = []
         postorder_trav(node, postord_list)
-        return inord_list, preord_list, postord_list
+        levelord_list = []
+        levelorder_trav(node, levelord_list)
+        iter_posorder_list = []
+        iter_posorder(node, iter_posorder_list)
+        # Edit everything properly
+        print('iter-pos: ', iter_posorder_list)
+        return inord_list, preord_list, postord_list, levelord_list
+
+
+def iter_posorder(node, lis):
+    "Iterative post order traversal."
+    st1 = []
+    st2 = []
+    st1.append(node)
+    while st1:
+        a = st1.pop()
+        # print('h')
+        st2.append(a)
+        if a.left:
+            st1.append(a.left)
+        if a.right:
+            st1.append(a.right)
+    # print(st2)
+    while st2:
+        v = (st2.pop())
+        # print(v.val)
+        lis.append(v.val)
 
 
 def inorder_trav(node, lis):
@@ -109,6 +152,18 @@ def postorder_trav(node, lis):
         lis.append(node.val)
 
 
+def levelorder_trav(node, lis):
+    "Level order traversal of a tree."
+    qu = [node]
+    while qu:
+        a = qu.pop(0)
+        lis.append(a.val)
+        if a.left:
+            qu.append(a.left)
+        if a.right:
+            qu.append(a.right)
+
+
 def unit_tests(in_list, pre_list, post_list):
     assert in_list == [1, 2, 3, 4, 6]
     assert pre_list == [3, 1, 2, 6, 4]
@@ -128,14 +183,19 @@ if __name__ == "__main__":
     bst.insert(nodeC, bst.root)
     bst.insert(nodeD, bst.root)
     bst.insert(nodeE, bst.root)
-    inord, preord, postord = bst.traversal()
+    inord, preord, postord, levelord = bst.traversal()
     print(unit_tests(inord, preord, postord))
     print("In-order traversal : {}, Pre-order traversal : {}, \
-Post-order traversal : {}".format(inord, preord, postord))
+Post-order traversal : {}, Level-order traversal : {}".format(inord, preord,
+                                                              postord,
+                                                              levelord))
     bst.delete(2, bst.root)
-    inord, preord, postord = bst.traversal()
+    inord, preord, postord, levelord = bst.traversal()
     # print(unit_tests(inord, preord, postord))
     print("In-order traversal : {}, Pre-order traversal : {}, \
 Post-order traversal : {}".format(inord, preord, postord))
     print(bst.search(bst.root, 44))
     print(bst.search(bst.root, 4))
+    print(bst.min_val(bst.root).val)
+    print(bst.max_val(bst.root).val)
+    print(bst.sec_largest(bst.root).val)
