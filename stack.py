@@ -1,6 +1,7 @@
 class Stack:
     """Stack represents stack DS with
     .items stores all stack values."""
+
     def __init__(self):
         self.items = []
 
@@ -14,7 +15,9 @@ class Stack:
 
     def peek(self):
         "Get the top value of the stack."
-        return self.items[len(self.items) - 1]
+        if not self.is_empty():
+            return self.items[-1]
+        return None
 
     def size(self):
         "Returns size of the stack"
@@ -22,10 +25,11 @@ class Stack:
 
     def is_empty(self):
         "Check if the stack is empty."
-        return self.items == []
+        return not self.items
 
     def __str__(self):
         return str(self.items)
+
 
 if __name__ == "__main__":
     stack = Stack()

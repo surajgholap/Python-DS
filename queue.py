@@ -1,6 +1,7 @@
 class Queue:
     """Queue represents queue data structure
     .items stores all the queue values."""
+
     def __init__(self):
         self.items = []
 
@@ -20,10 +21,11 @@ class Queue:
 
     def is_empty(self):
         "Check if the queue is empty."
-        return self.items == []
+        return not self.items
 
     def __str__(self):
         return str(self.items)
+
 
 if __name__ == "__main__":
     queue = Queue()
