@@ -3,6 +3,7 @@ class Node:
     DS..data is the value of the node and .next
     stores the address of next node in the linked
     list."""
+
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -11,12 +12,13 @@ class Node:
 class LinkedList:
     """LinkedList represents linked list DS with
     .head point to the start of the linked list."""
+
     def __init__(self):
         self.head = None
 
     def add_last(self, val):
         "Add a new node at the last position of the linked list."
-        if type(val) != Node:
+        if not isinstance(val, Node):
             val = Node(val)
         if self.head is None:
             self.head = val
@@ -41,12 +43,14 @@ class LinkedList:
     def __str__(self):
         st = ""
         point = self.head
-        while True:
+        while point:
             st += ("->{}".format(point.data))
-            if point.next is None:
-                break
+            # if point.next is None:
+            #     break
             point = point.next
         return st
+
+
 if __name__ == "__main__":
     l_list = LinkedList()
     l_list.add_last(Node("A"))

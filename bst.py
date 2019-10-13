@@ -3,6 +3,7 @@ class Node:
     .val is the value of the node and .left and
     .right are the left and right children of the
     node."""
+
     def __init__(self, val):
         if val is None:
             raise ValueError("Node value cannot be null")
@@ -14,13 +15,14 @@ class Node:
 class BST:
     """BST represents binary search tree DS and
     .root is the root of the tree."""
+
     def __init__(self, root):
         self.root = root
 
     def insert(self, node, r):
         "Inserts node into BST."
         if r is None:
-            r = node
+            r = self.root
         else:
             if node.val > r.val:
                 if r.right is None:
@@ -47,7 +49,7 @@ class BST:
             curr = curr.right
         return curr
 
-    def sec_largest(self, node):
+    def second_largest(self, node):
         "Return second largest valued node of the BST."
         curr = node
         while curr:
@@ -115,16 +117,13 @@ def iter_posorder(node, lis):
     st1.append(node)
     while st1:
         a = st1.pop()
-        # print('h')
         st2.append(a)
         if a.left:
             st1.append(a.left)
         if a.right:
             st1.append(a.right)
-    # print(st2)
     while st2:
         v = (st2.pop())
-        # print(v.val)
         lis.append(v.val)
 
 
@@ -196,6 +195,6 @@ Post-order traversal : {}, Level-order traversal : {}".format(inord, preord,
 Post-order traversal : {}".format(inord, preord, postord))
     print(bst.search(bst.root, 44))
     print(bst.search(bst.root, 4))
-    print(bst.min_val(bst.root).val)
-    print(bst.max_val(bst.root).val)
-    print(bst.sec_largest(bst.root).val)
+    print("Min value:", bst.min_val(bst.root).val)
+    print("Max value:", bst.max_val(bst.root).val)
+    print("Second largest value:", bst.second_largest(bst.root).val)

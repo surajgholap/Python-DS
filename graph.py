@@ -2,6 +2,7 @@ class GraphNode:
     """GraphNode represents node of any graph with
     .val as the value of the node and .adj as the
     list of adjacent nodes."""
+
     def __init__(self, val):
         self.val = val
         self.adj = set()
@@ -9,6 +10,7 @@ class GraphNode:
     def add_adjacent(self, new_val):
         "Add adjacent node of new_val value"
         self.adj.add(new_val)
+        new_val.adj.add(self)
 
     def get_adjacent(self):
         "Return all the adjacent nodes"
@@ -18,6 +20,7 @@ class GraphNode:
         "Removes adjacent node of val value"
         if val in self.adj:
             self.adj.remove(val)
+            val.adj.remove(self)
             return str(self)
         return ("Node not present!")
 
@@ -32,6 +35,7 @@ class GraphNode:
 class Graph:
     """Graph represents the DS graph, .nodes is the
     list of nodes/vertices present in the graph."""
+
     def __init__(self):
         self.nodes = {}
 
@@ -72,6 +76,7 @@ class Graph:
                     visited.append(w)
                     queue.append(w)
         return visited
+
 
 if __name__ == "__main__":
     """

@@ -1,6 +1,7 @@
 class Stack:
-    """Stack represents stack DS with
-    .items stores all stack values."""
+    """Stack represents stack DS which
+    follows FILO sequence with
+    .items storing all stack values."""
 
     def __init__(self):
         self.items = []
@@ -28,7 +29,8 @@ class Stack:
         return not self.items
 
     def __str__(self):
-        return str(self.items)
+        return "The len of the stack is {} and contents are {}".\
+            format(len(self.items), self.items)
 
 
 if __name__ == "__main__":

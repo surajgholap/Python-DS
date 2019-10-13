@@ -3,6 +3,7 @@ class Node:
     DS..data is the value of the node and .next
     stores the address of next node in the linked
     list"""
+
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -11,6 +12,7 @@ class Node:
 class LinkedList:
     """LinkedList represents linked list DS with
     .head point to the start of the linked list"""
+
     def __init__(self):
         self.head = None
 
@@ -70,6 +72,8 @@ class LinkedList:
                 break
             point = point.next
         return st
+
+
 if __name__ == "__main__":
     l_list = LinkedList()
     l_list.add_last(Node(4))
